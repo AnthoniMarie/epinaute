@@ -12,7 +12,7 @@ import jwt from 'jsonwebtoken';
 
 import {SERVER_SECRET_KEY} from '../config';
 import User from '../model/user';
-import logger from "../logger";
+import logger from '../logger';
 
 const router: Router = Router();
 
@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
         const userExists: boolean = await User.exists({ email: email });
         const hashedPassword: string = await bcrypt.hashSync(password, bcrypt.genSaltSync());
         if (userExists) {
-            logger.warn("User already exists");
+            logger.warn("User already exists ");
             res.status(httpStatus.CONFLICT).send("User already exists");
         } else {
             const user = await User.create({
@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
            logger.warn("Invalid username or password");
            res.status(httpStatus.UNAUTHORIZED).send("Invalid username or password");
        } else if (await bcrypt.compare(password, user.password)) {
-           const accessToken: string = jwt.sign({id: user._id, username: user.username}, SERVER_SECRET_KEY);
+           const accessToken: string = jwt.sign({id: user._id, email: user.email}, SERVER_SECRET_KEY);
            logger.info("User " + user._id +  " successfully login");
            res.status(httpStatus.OK).json({accessToken, info: 'User successfully login'});
        } else {
