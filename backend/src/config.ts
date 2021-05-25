@@ -5,12 +5,13 @@
 ** Epinaute Project Backend
 */
 
-import { get } from "env-var";
+import {get} from 'env-var';
 
 const env = (name: string, required: boolean = true) => get(name).required(required);
 
 export const SERVER_HOST: string = env('SERVER_HOST', false).default('127.0.0.1').asString();
 export const SERVER_PORT: number = env('SERVER_PORT', false).default(4242).asPortNumber();
+export const SERVER_SECRET_KEY: string = env('SERVER_SECRET_KEY', false).default('epinauteSecretKey').asString();
 
 export const MONGODB_HOST: string = env('MONGODB_HOST', true).asString();
 export const MONGODB_PORT: number = env('MONGODB_PORT', true).asPortNumber();

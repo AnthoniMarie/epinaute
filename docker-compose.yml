@@ -10,6 +10,7 @@ services:
     environment:
       SERVER_HOST: '127.0.0.1'
       SERVER_PORT: '4242'
+      SERVER_SECRET_KEY: 'epinauteSecretKey'
       MONGODB_HOST: db
       MONGODB_PORT: '27017'
       MONGODB_DB: 'epinaute'

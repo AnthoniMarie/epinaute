@@ -5,7 +5,7 @@
 ** Epinaute Project Backend
 */
 
-import express from 'express';
+import express, {Express} from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
@@ -13,7 +13,7 @@ import {SERVER_HOST, SERVER_PORT, MONGODB_HOST, MONGODB_PORT, MONGODB_DB} from "
 import logger from './logger';
 import router from './routes/routes';
 
-const server = express();
+const server: Express = express();
 
 mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
     useNewUrlParser: true,

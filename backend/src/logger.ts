@@ -1,4 +1,11 @@
-import winston from "winston";
+/*
+** EPITECH PROJECT, 2020
+** HUB_epinaute_2020
+** File description:
+** Epinaute Project Backend
+*/
+
+import winston from 'winston';
 
 enum LogSeverity {
     DEBUG = 'debug',
