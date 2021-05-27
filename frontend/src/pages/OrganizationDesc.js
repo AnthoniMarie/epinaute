@@ -81,4 +81,3 @@ class OrganizationDesc extends Component {
 }
 
 export default OrganizationDesc;
-

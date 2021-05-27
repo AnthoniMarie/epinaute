@@ -14,7 +14,6 @@ import {SERVER_SECRET_KEY} from '../config';
 import Organization from '../model/orgSchema';
 import User from '../model/userSchema';
 import {authenticate, IOrganization, IUser} from '../utils/utils';
-import logger from "../utils/logger";
 
 const router: Router = Router();
 

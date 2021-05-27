@@ -27,7 +27,7 @@ class About extends Component {
                 width="150"
                 height="150"
                 style={{ borderRadius: "5%", width: "unset" }}
-              ></img>
+              />
               <h2>Anthoni Marie</h2>
               <p>
                 Passionné d'automobile et informatique depuis mon enfance, ce
@@ -51,7 +51,7 @@ class About extends Component {
                 width="150"
                 height="150"
                 style={{ borderRadius: "5%", width: "unset" }}
-              ></img>
+              />
               <h2>Lorenzo Carneli</h2>
               <p>Lorem ipsum dolor sit a méthamphétamine.</p>
               <p>

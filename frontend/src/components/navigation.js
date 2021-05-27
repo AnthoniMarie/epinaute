@@ -15,12 +15,12 @@ export default () => (
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
       </>
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="/">
+          <a className="navbar-brand" href="/">
             Epinaute
           </a>
           <ul className="nav navbar-nav mr-auto" style={{ margin: "auto" }}>
@@ -50,7 +50,7 @@ export default () => (
             </li>
           </ul>
         </nav>
-        <SubHeader></SubHeader>
+        <SubHeader/>
         {/* <hr /> */}
         <Switch>
           <Route exact path="/" component={Home} />

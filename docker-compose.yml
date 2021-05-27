@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  frontend:
+    container_name: 'frontend'
+    build: './frontend'
+    ports:
+    - '3000:3000'
+    restart: 'on-failure'
+    environment:
+      API_HOST: backend
+      API_PORT: '4242'
+    networks:
+      - 'frontend'
+
   backend:
     container_name: 'backend'
     build: './backend'
@@ -22,7 +34,7 @@ services:
     container_name: 'database'
     image: 'mongo:4.4.6'
     ports:
-    - '27017:27017'
+    - '27017'
     networks:
       - 'backend'
     volumes:

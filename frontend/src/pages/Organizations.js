@@ -34,7 +34,7 @@ class Organizations extends Component {
                         <small>Posted on 01-05-2021</small>
                       </td>
                       <td className="p-description">
-                        <p class="text">description...</p>
+                        <p className="text">description...</p>
                       </td>
                       <td>
                         <span className="label label-default">Validée</span>
@@ -45,7 +45,7 @@ class Organizations extends Component {
                           className="btn btn-light btn-xs"
                           style={{}}
                         >
-                          <i aria-hidden="true" className="fa fa-folder"></i>{" "}
+                          <i aria-hidden="true" className="fa fa-folder"/>{" "}
                           Découvrir
                         </a>
                       </td>

@@ -11,7 +11,7 @@ class Home extends Component {
           <h2>Home Epinaute :)</h2>
         </div>
         <div className="container">
-          <div className="row d-flex justify-content-center"></div>
+          <div className="row d-flex justify-content-center"/>
           <Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
