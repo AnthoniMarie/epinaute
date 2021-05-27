@@ -7,15 +7,60 @@
 
 import {Router} from 'express';
 import httpStatus from 'http-status-codes';
-import jwt from 'jsonwebtoken';
 
-import {SERVER_SECRET_KEY} from '../config';
-import logger from '../logger';
-import Org from "../model/org";
+import Organization from '../model/orgSchema';
+import {authenticate, IOrganization} from '../utils/utils';
 
 const router: Router = Router();
 
-router.post('/edit', async (req, res) => {
+router.post('/edit', authenticate, async (req: any, res: any) => {
+    const {name, location, description, email}: any = req.body;
+
+    if (!name || !location || !description || !email)
+        return (res.sendStatus(httpStatus.BAD_REQUEST));
+
+    try {
+        const org: any = await Organization.findOne({name}).lean();
+
+        if (!org)
+            return (res.status(httpStatus.UNAUTHORIZED).send("Organization doesn't exists"));
+
+        const _id: string = org._id;
+        const editedOrg: IOrganization = {name, location, description, email};
+
+        await Organization.updateOne({_id}, editedOrg);
+        res.status(httpStatus.OK).send("Organization successfully updated");
+    } catch (error: any) {
+        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+});
+
+router.get('/me', authenticate, async (req: any, res: any) => {
+    const {organization}: any = req.user;
+
+    try {
+        const org: any = await Organization.findOne({name: organization});
+
+        if (!org)
+            return (res.status(httpStatus.UNAUTHORIZED).send("Organization doesn't exists"));
+
+        res.status(httpStatus.OK).json({org, info: 'Organization exists'});
+    } catch (error: any) {
+        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+});
+
+router.get('/all', async (req: any, res: any) => {
+    try {
+        const orgs: any = await Organization.find().lean();
+
+        res.status(httpStatus.OK).json({orgs});
+    } catch (error: any) {
+        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+});
+
+/*router.post('/edit', async (req, res) => {
     const {accessToken, name, description, email}: any = req.body;
 
     if (!accessToken || !name || !description || !email) {
@@ -85,6 +130,6 @@ router.get('/all', async (req, res) => {
     const orgs: any = await Org.find().lean();
 
     res.status(httpStatus.OK).json({orgs});
-});
+});*/
 
 export default router;

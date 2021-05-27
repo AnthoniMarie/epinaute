@@ -10,7 +10,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
 import {SERVER_HOST, SERVER_PORT, MONGODB_HOST, MONGODB_PORT, MONGODB_DB} from "./config";
-import logger from './logger';
+import logger from './utils/logger';
 import router from './routes/routes';
 
 const server: Express = express();
