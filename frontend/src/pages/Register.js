@@ -30,7 +30,7 @@ class Register extends Component {
             password: state.password,
           };
           axios
-            .post("127.0.0.1:2442" + "/user/register", payload)
+            .post("127.0.0.1:2442" + "/register", payload)
             .then(function (response) {
               if (response.status === 200) {
                 setState((prevState) => ({
