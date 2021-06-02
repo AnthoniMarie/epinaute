@@ -9,7 +9,7 @@ services:
     restart: 'on-failure'
     environment:
       API_HOST: backend
-      API_PORT: '4242'
+      API_PORT: '2442'
     networks:
       - 'frontend'
 
@@ -17,11 +17,11 @@ services:
     container_name: 'backend'
     build: './backend'
     ports:
-    - '4242:4242'
+    - '2442:2442'
     restart: 'on-failure'
     environment:
       SERVER_HOST: '127.0.0.1'
-      SERVER_PORT: '4242'
+      SERVER_PORT: '2442'
       SERVER_SECRET_KEY: 'epinauteSecretKey'
       MONGODB_HOST: db
       MONGODB_PORT: '27017'
