@@ -5,6 +5,8 @@ import Organizations from "../pages/Organizations";
 import OrganizationDesc from "../pages/OrganizationDesc";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
 import SubHeader from "../components/sub-header";
 
 export default () => (
@@ -49,6 +51,22 @@ export default () => (
               </Link>
             </li>
           </ul>
+          <span className="navbar-text actions">
+          <ul className="nav navbar-nav mr-auto" style={{ margin: "auto" }}>
+            <li>
+              <Link to={"/register"} className="nav-link">
+                {" "}
+                Register{" "}
+              </Link>
+            </li>
+            <li>
+              <Link to={"/login"} className="nav-link">
+                {" "}
+                Login{" "}
+              </Link>
+            </li>
+            </ul>
+          </span>
         </nav>
         <SubHeader/>
         {/* <hr /> */}
@@ -57,6 +75,8 @@ export default () => (
           <Route exact path="/organizations" component={Organizations} />
           <Route exact path="/about" component={About} />
           <Route exact path="/contact" component={Contact} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
           <Route
             exact
             path="/organization-example"
