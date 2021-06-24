@@ -1,0 +1,117 @@
+import React from "react";
+import { Alert } from "react-bootstrap";
+class LoginZone extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { showSuccessAlert: false };
+    this.state = { showIncorrectAlert: false };
+    this.state = { firstName: "" };
+    this.state = { lastName: "" };
+    this.state = { organization: "" };
+    this.state = { email: "" };
+    this.state = { password: "" };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleSubmit = (event) => {
+    let currentComponent = this;
+
+    fetch("http://127.0.0.1:2442/user/login", {
+      method: "POST",
+      //mode: 'no-cors',
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        organization: this.state.organization,
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    }).then(function (response) {
+      if (response.status == 200) {
+        currentComponent.setState({
+          showSuccessAlert: true,
+        });
+        return response.json();
+      }
+      else if (response.status == 401) {
+        console.log("Incorrected password");
+        currentComponent.setState({
+          showIncorrectAlert: true,
+        });
+      }
+      else if (response.status == 400)
+        alert("Veuillez remplir tous les champs.");
+      else console.log("an error occured :(");
+    });
+
+    event.preventDefault();
+  };
+
+  render() {
+    return (
+      <>
+      <div className="container">
+        <div className="text-center">
+        <h2>Login into your Epinaute account</h2>
+          {this.state.showSuccessAlert && (
+          <Alert variant="success">
+            <Alert.Heading>Login successfully.</Alert.Heading>
+            <p>Thank you !</p>
+          </Alert>
+        )}
+
+          {this.state.showIncorrectAlert && (
+          <Alert variant="danger">
+            <Alert.Heading>An error occured.</Alert.Heading>
+            <p>Login failed :/</p>
+          </Alert>
+        )}
+        </div>
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-6 m-auto">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="email">Email address</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.value}
+                  name="email"
+                  onChange={this.handleChange}
+                />
+                <small id="emailHelp" className="form-text text-muted">
+                  Email that you have used while registration.
+                </small>
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.value}
+                  name="password"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary float-right">
+                Login
+              </button>
+            </form>
+          </div>
+        </div>
+        </div>
+      </>
+    );
+  }
+}
+
+export default LoginZone;
