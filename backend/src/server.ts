@@ -8,6 +8,7 @@
 import express, {Express} from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from "cors";
 
 import {SERVER_HOST, SERVER_PORT, MONGODB_HOST, MONGODB_PORT, MONGODB_DB} from "./config";
 import logger from './utils/logger';
@@ -22,6 +23,7 @@ mongoose.connect(`mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}`, {
 });
 
 // server.use('/', express.static(path.join(__dirname, 'public')))
+server.use(cors());
 server.use(bodyParser.json());
 server.use(router);
 
