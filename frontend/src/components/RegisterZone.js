@@ -1,177 +1,148 @@
-import React, { useState, Component } from "react";
-import { Form, Button } from "react-bootstrap";
-import axios from "axios";
+import React from "react";
+import { Alert } from "react-bootstrap";
+class RegisterZone extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { showSuccessAlert: false };
+    this.state = { showAlreadyExistAlert: false };
+    this.state = { firstName: "" };
+    this.state = { lastName: "" };
+    this.state = { organization: "" };
+    this.state = { email: "" };
+    this.state = { password: "" };
 
-function RegisterZone(props) {
-  const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
-    organization: "",
-    email: "",
-    password: "",
-    //confirmPassword: "",
-    successMessage: null,
-  });
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   };
-  const pushDataToBackend = () => {
-    if (state.email.length && state.password.length) {
-      props.showError(null);
-      const payload = {
-        email: state.email,
-        password: state.password,
-      };
-      axios
-        .post("127.0.0.1:2442" + "/register", payload)
-        .then(function (response) {
-          if (response.status === 200) {
-            setState((prevState) => ({
-              ...prevState,
-              successMessage:
-                "Your Epinaute account has been created, redirecting you to the homepage of the website",
-            }));
-            localStorage.setItem("token_there", response.data.token);
-            redirectToHome();
-            props.showError(null);
-          } else {
-            alert("An error occured");
-            props.showError("An error occured");
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
+
+  handleSubmit = (event) => {
+    let currentComponent = this;
+    // alert("Registered user: " + this.state);
+
+    fetch("http://127.0.0.1:2442/user/register", {
+      method: "POST",
+      //mode: 'no-cors',
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        organization: this.state.organization,
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    }).then(function (response) {
+      if (response.status == 200) {
+        currentComponent.setState({
+          showSuccessAlert: true,
         });
-    } else {
-      props.showError("Please enter valid username and/or password");
-    }
+        return response.json();
+      }
+      else if (response.status == 409) {
+        console.log("the user is already in our database");
+        currentComponent.setState({
+          showAlreadyExistAlert: true,
+        });
+      }
+      else if (response.status == 400)
+        alert("Veuillez remplir tous les champs.");
+      else console.log("an error occured :(");
+    });
+
+    event.preventDefault();
   };
-  const redirectToHome = () => {
-    props.updateTitle("Epinaute - Home");
-    props.history.push("/");
-  };
-  const redirectToLogin = () => {
-    props.updateTitle("Epinaute - Login");
-    props.history.push("/login");
-  };
-  const submitLastCheck = (e) => {
-    e.preventDefault();
-    if (state.password === state.confirmPassword) {
-      pushDataToBackend();
-    } else {
-      props.showError("Your passwords are differents, please check them");
-    }
-  };
-  return (
-    <>
-      <div className="text-center">
-        <h2>Register to Epinaute</h2>
-      </div>
-      <div className="row d-flex justify-content-center">
-        <div className="col-md-6 m-auto">
-          <form>
-            <div className="form-group">
-              <label htmlFor="text">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                className="form-control"
-                id="firstName"
-                aria-describedby="firstNameHelp"
-                placeholder="Enter your First Name"
-                value={state.firstName}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="text">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                className="form-control"
-                id="lastName"
-                aria-describedby="lastNameHelp"
-                placeholder="Enter your Last Name"
-                value={state.lastName}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="text">Epitech's Organization name</label>
-              <input
-                type="text"
-                name="organization"
-                className="form-control"
-                id="organization"
-                aria-describedby="organizationHelp"
-                placeholder="Enter the name of your Epitech's organization"
-                value={state.organization}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email address</label>
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                id="email"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-                value={state.email}
-                onChange={handleChange}
-              />
-              <small id="emailHelp" className="form-text text-muted">
-                We'll never share your email with anyone else.
-              </small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="form-control"
-                id="password"
-                placeholder="Password"
-                value={state.password}
-                onChange={handleChange}
-              />
-            </div>
-            {/* <div className="form-group">
-                  <label htmlFor="confirmpassword">Password</label>
-                  <input
-                    type="password"
-                    name="password2"
-                    className="form-control"
-                    id="confirmpassword"
-                    placeholder="Password Again"
-                    value={state.confirmPassword}
-                    onChange={handleChange}
-                  />
-                </div> */}
-            {/* <div className="form-check">
-                  <input
-                    type="checkbox"
-                    name="checkbox"
-                    className="form-check-input"
-                    id="remember"
-                  />
-                  <label className="form-check-label" htmlFor="remember">
-                    I accept terms and conditions
-                  </label>
-                </div> */}
-            <button type="submit" className="btn btn-primary float-right">
-              Register
-            </button>
-          </form>
+
+  render() {
+    return (
+      <>
+      <div className="container">
+        <div className="text-center">
+          <h2>Register to Epinaute</h2>
+          {this.state.showSuccessAlert && (
+          <Alert variant="success">
+            <Alert.Heading>Registered successfully.</Alert.Heading>
+            <p>Thank you ! You registreation has been approved and complete :)</p>
+          </Alert>
+        )}
+
+          {this.state.showAlreadyExistAlert && (
+          <Alert variant="danger">
+            <Alert.Heading>An error occured.</Alert.Heading>
+            <p>This user is already registered in our database :/</p>
+          </Alert>
+        )}
         </div>
-      </div>
-    </>
-  );
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-6 m-auto">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="text">First Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.value}
+                  name="firstName"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="text">Last Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.value}
+                  name="lastName"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="text">Epitech's Organization name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.value}
+                  name="organization"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email address</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.value}
+                  name="email"
+                  onChange={this.handleChange}
+                />
+                <small id="emailHelp" className="form-text text-muted">
+                  We'll never share your email with anyone else.
+                </small>
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.value}
+                  name="password"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary float-right">
+                Register
+              </button>
+            </form>
+          </div>
+        </div>
+        </div>
+      </>
+    );
+  }
 }
 
 export default RegisterZone;
