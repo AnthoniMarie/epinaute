@@ -1,15 +1,20 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
+
 class LoginZone extends React.Component {
+
+  loginInformations(){
+    sessionStorage.setItem('token', "");
+  }
   constructor(props) {
     super(props);
-    this.state = { showSuccessAlert: false };
-    this.state = { showIncorrectAlert: false };
+    this.state = { login_check: "" };
     this.state = { firstName: "" };
     this.state = { lastName: "" };
     this.state = { organization: "" };
     this.state = { email: "" };
     this.state = { password: "" };
+    this.state = { is_logged: false};
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -36,16 +41,17 @@ class LoginZone extends React.Component {
         password: this.state.password,
       }),
     }).then(function (response) {
+      //console.log("TEST JSON RESPONSE ==>", response);
       if (response.status == 200) {
         currentComponent.setState({
-          showSuccessAlert: true,
+          login_check: "logged",
         });
         return response.json();
       }
       else if (response.status == 401) {
         console.log("Incorrected password");
         currentComponent.setState({
-          showIncorrectAlert: true,
+          login_check: "login_error",
         });
       }
       else if (response.status == 400)
@@ -57,24 +63,23 @@ class LoginZone extends React.Component {
   };
 
   render() {
+    let login_alert_box;
+    if (this.state.login_check == "logged")
+      login_alert_box = <Alert variant="success">
+        <Alert.Heading>Login successfully.</Alert.Heading>
+        <p>Thank you !</p>
+      </Alert>;
+    else if (this.state.login_check == "login_error")
+      login_alert_box = <Alert variant="danger">
+        <Alert.Heading>An error occured.</Alert.Heading>
+        <p>Login failed :/</p>
+      </Alert>
     return (
       <>
       <div className="container">
         <div className="text-center">
         <h2>Login into your Epinaute account</h2>
-          {this.state.showSuccessAlert && (
-          <Alert variant="success">
-            <Alert.Heading>Login successfully.</Alert.Heading>
-            <p>Thank you !</p>
-          </Alert>
-        )}
-
-          {this.state.showIncorrectAlert && (
-          <Alert variant="danger">
-            <Alert.Heading>An error occured.</Alert.Heading>
-            <p>Login failed :/</p>
-          </Alert>
-        )}
+          {login_alert_box}
         </div>
         <div className="row d-flex justify-content-center">
           <div className="col-md-6 m-auto">
