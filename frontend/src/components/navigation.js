@@ -7,8 +7,15 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
+import AdminHome from "../pages/admin/Home";
 import SubHeader from "../components/sub-header";
+import PrivateRoute from "../components/PrivateRoute";
 
+console.log("[NAVIGATION] - Current login status ==> ", localStorage.getItem("logged"));
+let login_status = localStorage.getItem("logged");
+const handleLogout = () => {
+  localStorage.clear();
+};
 export default () => (
   <>
     <Router>
@@ -52,20 +59,40 @@ export default () => (
             </li>
           </ul>
           <span className="navbar-text actions">
-          <ul className="nav navbar-nav mr-auto" style={{ margin: "auto" }}>
-            <li>
-              <Link to={"/register"} className="nav-link">
-                {" "}
-                Register{" "}
-              </Link>
-            </li>
-            <li>
-              <Link to={"/login"} className="nav-link">
-                {" "}
-                Login{" "}
-              </Link>
-            </li>
-            </ul>
+             {login_status
+                 ?
+                 <ul className="nav navbar-nav mr-auto" style={{ margin: "auto" }}>
+                   <li>
+                     <Link to={"/admin"} className="nav-link">
+                       {" "}
+                       Admin{" "}
+                     </Link>
+                   </li>
+                   <li>
+                     <Link to={"/login"} className="nav-link">
+                       {" "}
+                       Logout{" "}
+                     </Link>
+                   </li>
+                   <button onClick={handleLogout}>logout</button>
+                 </ul>
+                 :
+                 <ul className="nav navbar-nav mr-auto" style={{ margin: "auto" }}>
+                   <li>
+                     <Link to={"/register"} className="nav-link">
+                       {" "}
+                       Register{" "}
+                     </Link>
+                   </li>
+                   <li>
+                     <Link to={"/login"} className="nav-link">
+                       {" "}
+                       Login{" "}
+                     </Link>
+                   </li>
+                 </ul>
+             }
+
           </span>
         </nav>
         <SubHeader/>
@@ -77,6 +104,7 @@ export default () => (
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/admin" component={AdminHome} />
           <Route
             exact
             path="/organization-example"

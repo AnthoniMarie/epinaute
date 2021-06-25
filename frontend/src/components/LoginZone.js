@@ -2,10 +2,6 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 
 class LoginZone extends React.Component {
-
-  loginInformations(){
-    sessionStorage.setItem('token', "");
-  }
   constructor(props) {
     super(props);
     this.state = { login_check: "" };
@@ -14,7 +10,6 @@ class LoginZone extends React.Component {
     this.state = { organization: "" };
     this.state = { email: "" };
     this.state = { password: "" };
-    this.state = { is_logged: false};
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -24,7 +19,7 @@ class LoginZone extends React.Component {
   };
 
   handleSubmit = (event) => {
-    let currentComponent = this;
+    let currentComponent = this
 
     fetch("http://127.0.0.1:2442/user/login", {
       method: "POST",
@@ -41,8 +36,8 @@ class LoginZone extends React.Component {
         password: this.state.password,
       }),
     }).then(function (response) {
-      //console.log("TEST JSON RESPONSE ==>", response);
       if (response.status == 200) {
+        localStorage.setItem('logged', true);
         currentComponent.setState({
           login_check: "logged",
         });
@@ -58,11 +53,11 @@ class LoginZone extends React.Component {
         alert("Veuillez remplir tous les champs.");
       else console.log("an error occured :(");
     });
-
     event.preventDefault();
   };
 
   render() {
+    console.log("[LOGINZONE] - Current login status ==> ", localStorage.getItem("logged"));
     let login_alert_box;
     if (this.state.login_check == "logged")
       login_alert_box = <Alert variant="success">
