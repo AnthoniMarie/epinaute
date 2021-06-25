@@ -126,7 +126,7 @@ class RegisterZone extends React.Component {
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   value={this.state.value}
                   name="password"
