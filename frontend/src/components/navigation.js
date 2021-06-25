@@ -15,6 +15,7 @@ console.log("[NAVIGATION] - Current login status ==> ", localStorage.getItem("lo
 let login_status = localStorage.getItem("logged");
 const handleLogout = () => {
   localStorage.clear();
+  window.location.replace("/");
 };
 export default () => (
   <>
@@ -69,12 +70,11 @@ export default () => (
                      </Link>
                    </li>
                    <li>
-                     <Link to={"/login"} className="nav-link">
+                     <Link className="nav-link" onClick={handleLogout}>
                        {" "}
                        Logout{" "}
                      </Link>
                    </li>
-                   <button onClick={handleLogout}>logout</button>
                  </ul>
                  :
                  <ul className="nav navbar-nav mr-auto" style={{ margin: "auto" }}>

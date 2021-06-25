@@ -41,6 +41,7 @@ class LoginZone extends React.Component {
         currentComponent.setState({
           login_check: "logged",
         });
+        window.location.replace("/");
         return response.json();
       }
       else if (response.status == 401) {
