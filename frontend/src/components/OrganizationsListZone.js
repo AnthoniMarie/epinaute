@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class OrganizationsListZone extends React.Component {
     constructor() {
@@ -47,12 +48,14 @@ class OrganizationsListZone extends React.Component {
                                             return (
                                                 <tr>
                                                     <td className="p-name">
-                                                        <a
-                                                            href={"/organization-example"}
-                                                            data-project="display_projectname"
+                                                        <Link
+                                                            to={{
+                                                                pathname: "/organization/" + orga_item._id,
+                                                                data: orga_item,
+                                                            }}
                                                         >
-                                                            {orga_item.name}
-                                                        </a>{" "}
+                                                            {orga_item.name} {orga_item._id}
+                                                        </Link>{" "}
                                                         <br />
                                                         <small>Posted on x</small>
                                                     </td>
@@ -65,17 +68,19 @@ class OrganizationsListZone extends React.Component {
                                 </span>
                                                     </td>
                                                     <td>
-                                                        <a
-                                                            href="{'/organization-example'}"
+                                                        <Link
+                                                            to={{
+                                                                pathname: "/organization/" + orga_item._id,
+                                                                data: orga_item,
+                                                            }}
                                                             className="btn btn-light btn-xs"
-                                                            style={{}}
                                                         >
                                                             <i
                                                                 aria-hidden="true"
                                                                 className="fa fa-folder"
                                                             />{" "}
                                                             Découvrir
-                                                        </a>
+                                                        </Link>
                                                     </td>
                                                 </tr>
                                             );

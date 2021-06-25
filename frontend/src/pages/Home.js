@@ -12,7 +12,7 @@ class Home extends Component {
         </div>
         <div className="container">
           <div className="row d-flex justify-content-center"/>
-          <Card style={{ width: "18rem" }}>
+          {/*<Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
               src="https://res.cloudinary.com/dswcrbbwu/image/upload/v1621867352/epinaute.org/images/porsche-911-gt2-5795128_1920_tbswku.jpg"
@@ -22,7 +22,7 @@ class Home extends Component {
               <Card.Text>Hi Epitech.</Card.Text>
               <Button variant="primary">Read</Button>
             </Card.Body>
-          </Card>
+          </Card>*/}
         </div>
       </>
     );
