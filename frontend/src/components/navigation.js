@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "../pages/Home";
 import Organizations from "../pages/Organizations";
 import OrganizationDesc from "../pages/OrganizationDesc";
+import OrganizationDescZone from "../components/OrganizationDescZone";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Register from "../pages/Register";
@@ -103,8 +104,8 @@ export default () => (
             <Route exact path="/organizations" component={Organizations} />
             <Route
                 path="/organization/:id"
-                component={OrganizationDesc}
-                render={(props) => <OrganizationDesc {...props} />}
+                component={OrganizationDescZone}
+                render={(props) => <OrganizationDescZone {...props} />}
             />
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
