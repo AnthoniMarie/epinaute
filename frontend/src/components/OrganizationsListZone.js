@@ -54,7 +54,7 @@ class OrganizationsListZone extends React.Component {
                                                                 data: orga_item,
                                                             }}
                                                         >
-                                                            {orga_item.name} {orga_item._id}
+                                                            {orga_item.name}
                                                         </Link>{" "}
                                                         <br />
                                                         <small>Posted on x</small>
