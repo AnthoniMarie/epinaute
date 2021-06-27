@@ -57,6 +57,7 @@ class LoginZone extends React.Component {
         })
         .then((response) => {
           this.setState({ token: response.token });
+          localStorage.setItem("unique", this.state.token);
           return response;
         });
 
