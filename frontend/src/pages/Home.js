@@ -7,23 +7,18 @@ class Home extends Component {
     const PageDesc = "Promote your organization";
     return (
       <>
-        <div className="text-center">
-          <h2>Home Epinaute :)</h2>
-        </div>
-        <div className="container">
-          <div className="row d-flex justify-content-center"/>
-          {/*<Card style={{ width: "18rem" }}>
-            <Card.Img
-              variant="top"
-              src="https://res.cloudinary.com/dswcrbbwu/image/upload/v1621867352/epinaute.org/images/porsche-911-gt2-5795128_1920_tbswku.jpg"
-            />
-            <Card.Body>
-              <Card.Title>Blog Title</Card.Title>
-              <Card.Text>Hi Epitech.</Card.Text>
-              <Button variant="primary">Read</Button>
-            </Card.Body>
-          </Card>*/}
-        </div>
+          <div className="cover-container d-flex h-100 p-3 mx-auto flex-column justify-content-center" style={{maxWidth: '54em'}}>
+              <main role="main" className="inner cover">
+                  <h1 className="cover-heading">Découvrez dès maintenant les associations d'Epitech.</h1>
+                  <p className="lead">Envie d'agir sur une cause qui vous tient à coeur ? Profitez d'une liste de toutes les associations référencées à Epitech ainsi que leurs buts et le moyen de pouvoir rejoindre.</p>
+                  <p className="lead">
+                      <a href="/organizations" className="btn btn-lg btn-secondary">Voir la liste</a>
+                      <br></br>
+                      <br></br>
+                      <a href="/register" className="btn btn-lg btn-dark">Référencer mon association</a>
+                  </p>
+              </main>
+          </div>
       </>
     );
   }
