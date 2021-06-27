@@ -2,16 +2,20 @@ version: '3.8'
 
 services:
   frontend:
-    container_name: 'frontend'
-    build: './frontend'
-    ports:
-    - '3000:3000'
-    restart: 'on-failure'
-    environment:
+   container_name: 'frontend'
+   build: './frontend'
+   ports:
+   - '3000:3000'
+   restart: 'on-failure'
+   environment:
       API_HOST: backend
       API_PORT: '2442'
-    networks:
-      - 'frontend'
+      EMAILJS_SERVICEID: 'service_0iyrdpa'
+      EMAILJS_TEMPLATEID: 'template_ulm02cs'
+      EMAILJS_USERID: 'user_hIwiJ3wMrHTeu0XP0k73A'
+
+   networks:
+     - 'frontend'
 
   backend:
     container_name: 'backend'
