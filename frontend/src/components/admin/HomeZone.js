@@ -21,7 +21,7 @@ class HomeZone extends Component {
         let currentComponent = this;
         let unique_id = localStorage.getItem("unique");
 
-        fetch("http://epinaute.org:2442/org/edit", {
+        fetch("http://135.125.88.15:2442/org/edit", {
             method: "POST",
             headers: {
                 Authorization: "Basic " + unique_id,
@@ -56,7 +56,7 @@ class HomeZone extends Component {
         let unique_id = localStorage.getItem("unique");
 
         Promise.all([
-            fetch("http://epinaute.org:2442/user/me", {
+            fetch("http://135.125.88.15:2442/user/me", {
                 method: "GET",
                 headers: {
                     Authorization: "Basic " + unique_id,
@@ -64,7 +64,7 @@ class HomeZone extends Component {
                     "Content-Type": "application/json",
                 },
             }).then((res) => res.json()),
-            fetch("http://epinaute.org:2442/org/me", {
+            fetch("http://135.125.88.15:2442/org/me", {
                 method: "GET",
                 headers: {
                     Authorization: "Basic " + unique_id,
