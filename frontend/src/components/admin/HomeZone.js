@@ -56,7 +56,7 @@ class HomeZone extends Component {
         let unique_id = localStorage.getItem("unique");
 
         Promise.all([
-            fetch("http://172.17.0.1:2442/user/me", {
+            fetch("http://epinaute.org:2442/user/me", {
                 method: "GET",
                 headers: {
                     Authorization: "Basic " + unique_id,
@@ -64,7 +64,7 @@ class HomeZone extends Component {
                     "Content-Type": "application/json",
                 },
             }).then((res) => res.json()),
-            fetch("http://172.17.0.1:2442/org/me", {
+            fetch("http://epinaute.org:2442/org/me", {
                 method: "GET",
                 headers: {
                     Authorization: "Basic " + unique_id,
