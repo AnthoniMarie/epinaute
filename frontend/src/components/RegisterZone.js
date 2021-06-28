@@ -21,7 +21,7 @@ class RegisterZone extends React.Component {
   handleSubmit = (event) => {
     let currentComponent = this;
 
-    fetch("http://172.17.0.1:2442/user/register", {
+    fetch("http://epinaute.org:2442/user/register", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",

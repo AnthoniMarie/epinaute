@@ -22,7 +22,7 @@ class LoginZone extends React.Component {
   handleSubmit = (event) => {
     let currentComponent = this;
     let status;
-    fetch("http://172.17.0.1:2442/user/login", {
+    fetch("http://epinaute.org:2442/user/login", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",

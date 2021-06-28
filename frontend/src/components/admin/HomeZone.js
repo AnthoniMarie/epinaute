@@ -21,7 +21,7 @@ class HomeZone extends Component {
         let currentComponent = this;
         let unique_id = localStorage.getItem("unique");
 
-        fetch("http://172.17.0.1:2442/org/edit", {
+        fetch("http://epinaute.org:2442/org/edit", {
             method: "POST",
             headers: {
                 Authorization: "Basic " + unique_id,
