@@ -8,17 +8,17 @@ export default function Contact() {
 
     emailjs
         .sendForm(
-            process.env.EMAILJS_SERVICEID,
-            process.env.EMAILJS_TEMPLATEID,
+            "service_0iyrdpa",
+            "template_ulm02cs",
             e.target,
-            process.env.EMAILJS_USERID
+            "user_hIwiJ3wMrHTeu0XP0k73A"
         )
         .then(
             (result) => {
-              alert("Message envoyé avec succès !");
+              alert("Your message has been sent !");
             },
             (error) => {
-              alert("Une erreur est survenue, veuillez réessayer.");
+              alert("An error has occured, please check your message.");
             }
         );
   }

@@ -36,9 +36,9 @@ class OrganizationsListZone extends React.Component {
                                 <table className="table" style={{ fontSize: "15px" }}>
                                     <thead>
                                     <tr>
-                                        <th>Nom de l'association</th>
+                                        <th>Organization's name</th>
                                         <th>Description</th>
-                                        <th>Etat</th>
+                                        <th>Location</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -57,7 +57,6 @@ class OrganizationsListZone extends React.Component {
                                                             {orga_item.name}
                                                         </Link>{" "}
                                                         <br />
-                                                        <small>Posted on x</small>
                                                     </td>
                                                     <td className="p-description">
                                                         <p className="text">{orga_item.description}</p>

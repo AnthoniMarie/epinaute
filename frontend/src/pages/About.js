@@ -30,8 +30,7 @@ class About extends Component {
               />
               <h2>Anthoni Marie</h2>
               <p>
-                Passionné d'automobile et informatique depuis mon enfance, ce
-                projet me tient particulièrement à coeur !
+                Car and computer enthusiast since my childhood, this project is particularly close to my heart!
               </p>
               <p>
                 <a
@@ -39,7 +38,7 @@ class About extends Component {
                   href="https://anthoni-marie.fr"
                   role="button"
                 >
-                  En savoir plus
+                  See more
                 </a>
               </p>
             </div>
@@ -53,10 +52,10 @@ class About extends Component {
                 style={{ borderRadius: "5%", width: "unset" }}
               />
               <h2>Lorenzo Carneli</h2>
-              <p>Lorem ipsum dolor sit a méthamphétamine.</p>
+              <p>I am enthusiast about everything related to software and the web, I already have a lot of knowledge on the software side (Docker, Cloudflare, ...) and some elementary knowledge on the web side (HTML / CSS, ReactJS ...)..</p>
               <p>
                 <a className="btn btn-secondary" href="#" role="button">
-                  En savoir plus
+                  See more
                 </a>
               </p>
             </div>
