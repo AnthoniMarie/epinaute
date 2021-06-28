@@ -22,9 +22,8 @@ class LoginZone extends React.Component {
   handleSubmit = (event) => {
     let currentComponent = this;
     let status;
-    fetch("http://127.0.0.1:2442/user/login", {
+    fetch("http://172.17.0.1:2442/user/login", {
       method: "POST",
-      //mode: 'no-cors',
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
@@ -65,11 +64,6 @@ class LoginZone extends React.Component {
   };
 
   render() {
-    console.log("Auth Token => ", this.state.token);
-    console.log(
-        "[LOGINZONE] - Current login status ==> ",
-        localStorage.getItem("logged")
-    );
     let login_alert_box;
     if (this.state.login_check == "logged")
       login_alert_box = (

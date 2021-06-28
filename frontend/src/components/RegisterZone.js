@@ -20,11 +20,9 @@ class RegisterZone extends React.Component {
 
   handleSubmit = (event) => {
     let currentComponent = this;
-    // alert("Registered user: " + this.state);
 
-    fetch("http://127.0.0.1:2442/user/register", {
+    fetch("http://172.17.0.1:2442/user/register", {
       method: "POST",
-      //mode: 'no-cors',
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",

@@ -11,7 +11,7 @@ class OrganizationsListZone extends React.Component {
     componentDidMount() {
         let orga_items = [];
 
-        fetch("http://127.0.0.1:2442/org/all", {
+        fetch("http://172.17.0.1:2442/org/all", {
             method: "GET",
             headers: {
                 Accept: "application/json",
